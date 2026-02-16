@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Elcanah ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+            width: 90%;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            color: #ff4e7a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+            background: #ffe6ee;
+        }
+        /* Envelope Animation */
+        
+        .envelope {
+            position: fixed;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 120px;
+            opacity: 0;
+            transition: all 2s ease;
+        }
+        
+        .envelope.fly {
+            bottom: 50%;
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 1;
+        }
+        /* Letter */
+        
+        .letter {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            line-height: 1.8;
+            display: none;
+            animation: fadeIn 2s ease forwards;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .signature {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Floating hearts */
+        
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.8;
+        }
+        
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 0.9;
+            }
+            to {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+        
+        @media(max-width:600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .letter {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>
+            My Love… 💌 <br> I made something for you. <br> Click only if your heart is ready. ❤️
+        </h1>
+
+        <button class="btn" onclick="startSurprise()">Open My Letter</button>
+
+        <div class="letter" id="letter">
+            Sa loob ng tatlong taon ng pag-ibig, Sa pagitan ng mga pahina ng thesis at puyat na gabi, Sa gitna ng kaba sa recitation at pangarap na bitbit, Ikaw ang pahinga ko, ang aking munting langit. Noong tayo’y mga estudyanteng salat sa oras, Baon ay sipag,
+            tiyaga, at mga baryang kinapos, Sa silid-aklatan at karinderyang saksi sa ating lakas, Pag-ibig natin ang laging panalo sa unos. Magkahawak-kamay sa ulan ng requirements, Magkatabi sa bagyong dulot ng deadlines, Hanggang sa sabay nating nasilayan
+            ang pagtatapos— Mga pusong hinubog ng sakripisyo at dasal. Ngayo’y tayo nama’y mga batang propesyonal, Humaharap sa mundo nang may tapang at dangal, Sa bawat hamon ng buhay na tunay at brutal, Ikaw pa rin ang tahanan kong banal. Elcanah Maria
+            Costelo, Pangalan mong sa dibdib ko’y nakaukit, Parang tala sa dilim ng aking bukas, Ikaw ang gabay, ikaw ang aking langit. Sa tatlong taong punô ng luha’t halakhak, Sa mga gabing tayo’y muntik nang mapagod, Pinili pa rin nating manatili’t
+            magmahal— Dahil ang “tayo” ay higit sa anumang takot. At ngayon, sa pintuan ng bagong yugto, Habang tayo’y papalapit sa pangakong “habambuhay,” Bitbit ang lahat ng ating pinagdaanan, Ako’y buong pusong magsasabi: Ikaw ang aking kahapon na
+            pinaglaban, Ikaw ang aking ngayon na ipinagpapasalamat, At ikaw ang aking bukas na pakakasalan— Elcanah Maria Costelo, Sa iyo lamang ang aking walang hanggang pag-ibig.
+
+            <div class="signature">
+                Forever yours ❤️
+            </div>
+        </div>
+    </div>
+
+    <div class="envelope" id="envelope">💌</div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" src="Ikawatako.mp3"></audio>
+
+    <script>
+        function startSurprise() {
+
+            document.querySelector(".btn").style.display = "none";
+
+            const envelope = document.getElementById("envelope");
+            const letter = document.getElementById("letter");
+            const music = document.getElementById("bgMusic");
+
+            // Play music (allowed because user clicked)
+            music.volume = 0.7;
+            music.play().catch(() => {});
+
+            // Animate envelope
+            envelope.classList.add("fly");
+
+            // After animation, show letter
+            setTimeout(() => {
+                envelope.style.display = "none";
+                letter.style.display = "block";
+                createHearts();
+            }, 2000);
+        }
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+                heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 300);
+        }
+    </script>
+
+</body>
+
+</html>
